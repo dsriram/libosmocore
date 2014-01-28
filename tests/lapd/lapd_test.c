@@ -132,9 +132,11 @@ static struct msgb *create_dummy_data_req(void)
 static struct msgb *create_rel_req(void)
 {
 	struct msgb *msg;
+	const int dummy_l1len = 3;
 
 	msg = msgb_from_array(rel_req, sizeof(rel_req));
 	msg->l2h = msg->data;
+	msgb_push(msg, dummy_l1len);
 	msg->l3h = msg->l2h + sizeof(struct abis_rsl_rll_hdr);
 	return msg;
 }
@@ -142,9 +144,11 @@ static struct msgb *create_rel_req(void)
 static struct msgb *create_est_req(const uint8_t *est_req, size_t est_req_size)
 {
 	struct msgb *msg;
+	const int dummy_l1len = 3;
 
 	msg = msgb_from_array(est_req, est_req_size);
 	msg->l2h = msg->data;
+	msgb_push(msg, dummy_l1len);
 	msg->l3h = msg->l2h + sizeof(struct abis_rsl_rll_hdr);
 	return msg;
 }
